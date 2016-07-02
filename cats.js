@@ -1,9 +1,12 @@
+// 'use strict'
+//use posteman to do CRUD to _cat array
 var _ = require('lodash');
 
 module.exports = function(app) {
+	// console.log(app)
 	_cats = [];
 
-	app.post('/cat', function(){
+	app.post('/cat', function(req,res){
 		_cats.push(req.body);
 		res.json({info: "cat created successfully"});
 	});
@@ -35,7 +38,11 @@ module.exports = function(app) {
 	});
 
 	app.delete('/cat/:id', function(req, res) {
+		_.remove(_cats, function(cat) {
+			return cat.name === req.params.id;
+		});
 
+		res.json({info: 'cat removed successfully'});
 	});
 
 
