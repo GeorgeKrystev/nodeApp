@@ -48,7 +48,7 @@ module.exports = function(app) {
 				_.merge(cat, req.body);
 				cat.save(function(err){
 					if (err) {
-						res.json({info: 'error during cat update', error: err});
+						res.json({info: 'error during saving the cat', error: err});
 					};
 					res.json({info: "cat update successfully"});
 				});
