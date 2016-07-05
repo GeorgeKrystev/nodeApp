@@ -1,5 +1,5 @@
 var _ = require('lodash'),
- 	Cat = require('./cat_model.js');
+ 	Cat = require('../models/cat.js');
 
 module.exports = function(app) { 
 
@@ -25,12 +25,15 @@ module.exports = function(app) {
 	});
 
 	app.get('/cat/:id', function(req, res) {
-		Cat.find(function(err,cats) {
+		Cat.findById(req.params.id,function(err,cat) {
 			if(err) {
 				res.json({info: "error during cind cats", error: err});
 			};
 			if(cat) {
-				res.json({info: 'cats found successfully', data: cats});
+				res.json({info: 'cats found successfully', data: cat});
+				setTimeout(function(){
+					res.json({info: 'cats found successfully', data: cat});					
+				}, 10000)
 			} else {
 				res.json({ info: "cat not found "});
 			}
