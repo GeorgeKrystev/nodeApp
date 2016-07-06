@@ -37,7 +37,8 @@ module.exports = function(app) {
 		 				r({ uri: 'http://localhost:3001/dog' }, function(error, response, body) {
 		 					if(error) { throw error	}
 		 					if ( !error && response.statusCode === 200 ) {
-		 						client.set('http://localhost:3001/dog', JSON.stringify(body.data), function(error){
+		 						// client.set('http://localhost:3001/dog', JSON.stringify(body.data), function(error){
+		 						client.setex('http://localhost:3001/dog',10, JSON.stringify(body.data), function(error){
 		 							if (error) {throw error};
 		 						});
 		 						// callback(null, body.data);
